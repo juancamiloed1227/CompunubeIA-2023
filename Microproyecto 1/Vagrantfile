@@ -1,0 +1,31 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+
+ config.vm.provider "virtualbox" do |v|
+    v.memory = 512
+ end
+ 
+ if Vagrant.has_plugin? "vagrant-vbguest"
+    config.vbguest.no_install  = true
+    config.vbguest.auto_update = false
+    config.vbguest.no_remote   = true
+  end
+
+  config.vm.define :nodeone do |nodeone|
+    nodeone.vm.box = "bento/ubuntu-20.04"
+    nodeone.vm.network :private_network, ip: "192.168.100.2"
+    nodeone.vm.hostname = "nodeone"
+    nodeone.vm.provision "file", source: "nodeonescripts", destination: "$HOME/scripts"
+    nodeone.vm.provision "shell", path: "nodeone.sh", privileged: true
+  end
+
+  config.vm.define :nodetwo do |nodetwo|
+    nodetwo.vm.box = "bento/ubuntu-20.04"
+    nodetwo.vm.network :private_network, ip: "192.168.100.3"
+    nodetwo.vm.hostname = "nodetwo"
+    nodetwo.vm.provision "file", source: "nodetwoscripts", destination: "$HOME/scripts"
+    nodetwo.vm.provision "shell", path: "nodetwo.sh", privileged: true
+  end
+end

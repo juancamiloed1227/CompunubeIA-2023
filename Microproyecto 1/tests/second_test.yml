@@ -1,0 +1,19 @@
+config:
+  target: "http://192.168.100.2"
+  phases:
+    - duration: 25
+      arrivalRate: 6
+      name: Warm up
+    - duration: 45
+      arrivalRate: 9
+      rampTo: 45
+      name: Ramp up load
+    - duration: 75
+      arrivalRate: 65
+      name: Sustained load
+
+scenarios:
+  - name: "Second Test"
+    flow:
+      - get:
+          url: "/"

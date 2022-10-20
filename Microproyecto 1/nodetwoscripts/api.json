@@ -1,0 +1,29 @@
+{
+    "services": [
+      {
+        "id": "server3000",
+        "name": "server",
+        "port": 3000
+      },
+      {
+        "id": "server3001",
+        "name": "server",
+        "port": 3001
+      },
+      {
+        "id": "server3002",
+        "name": "server",
+        "port": 3002
+      },
+      {
+        "id": "server3003",
+        "name": "server",
+        "port": 3003
+      },
+      {
+        "id": "server3004",
+        "name": "server",
+        "port": 3004
+      }
+    ]
+}
