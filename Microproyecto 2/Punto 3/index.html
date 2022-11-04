@@ -1,0 +1,27 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Generador de texto</title></head><body><h1>Generador de texto</h1><textarea class="input" id="prompt" name="text" rows="20" cols="100"></textarea><br><button id="button">Generar texto</button><br><script>const updateText = (json) => {
+    document.getElementById('prompt').value += `${json.choices[0].text}`;
+}
+
+const displayDate = () => {
+    let text = document.getElementById("prompt").value
+
+    let body = {
+        "model": "text-davinci-002", "prompt": `${text}`,
+        "temperature": 0.7,
+        "max_tokens": 700
+    }
+
+    fetch('https://api.openai.com/v1/completions', {
+    method: "POST",
+    headers: {
+        "Content-type": "application/json",
+        "Authorization": ""
+    },
+    body: JSON.stringify(body)
+    })
+    .then(response => response.json()) 
+    .then((json) => updateText(json))
+    .catch(err => console.log(err));
+
+}
+document.getElementById("button").addEventListener("click", displayDate);</script><style>@import url(https://fonts.googleapis.com/css2?family=Poppins&display=swap);*{font-family:Poppins,sans-serif}button{background-color:#000;color:#fff;font-family:Poppins,sans-serif;padding:10px 35px 10px 35px;margin-bottom:15px;border:none;border-radius:20px}button:hover{background-color:#4a4a4a;cursor:pointer}.input{padding:10px;margin-bottom:15px;border:2px solid #000;border-radius:4px}</style></body></html>

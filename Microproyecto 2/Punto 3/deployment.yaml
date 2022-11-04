@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: apache-text-deploy
+spec:
+  selector:
+    matchLabels:
+      app: apache-text
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: apache-text
+    spec:
+     containers:
+     - name: apache-text
+       image: juancamiloed12/apache-text:latest
+       imagePullPolicy: Always
+       ports:
+       - containerPort: 8888
